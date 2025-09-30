@@ -1,0 +1,52 @@
+---
+config:
+  theme: default
+  flowchart:
+    curve: basis
+---
+graph TB
+    Start([START]) --> Planner[<b>Planner Agent</b><br/>Analyzes interests & generates<br/>research tasks]
+    
+    Planner -->|Parallel Execution| Scout1[<b>Scout Agent 1</b>]
+    Planner -->|Parallel Execution| Scout2[<b>Scout Agent 2</b>]
+    Planner -->|Parallel Execution| ScoutN[<b>Scout Agent N</b>]
+    
+    subgraph ScoutSubgraph["Scout Agent (runs in parallel)"]
+        direction TB
+        ScoutStart([Scout Start]) --> ScoutAgent[Agent Decision]
+        ScoutAgent -->|Has tool calls?| Tools[Execute Tools<br/>Web Search, Reddit,<br/>ArXiv, YouTube]
+        Tools --> ToolCounter{Iteration < 3?}
+        ToolCounter -->|Yes| ScoutAgent
+        ToolCounter -->|No| ScoutFinal[Parse Structured<br/>Output]
+        ScoutAgent -->|No tool calls| ScoutFinal
+        ScoutFinal --> ScoutEnd([Scout End])
+    end
+    
+    Scout1 --> Evaluator
+    Scout2 --> Evaluator
+    ScoutN --> Evaluator
+    
+    subgraph EvaluatorSubgraph["Evaluator Agent (with follow-up loop)"]
+        direction TB
+        EvalStart([Evaluator Start]) --> EvalLLM[<b>LLM Node</b><br/>Score & rank stories<br/>Identify gaps]
+        EvalLLM -->|Needs more info?| Router{Investigation<br/>Required?}
+        Router -->|Yes & cycles < 1| FollowScout[<b>Follow-up Scout</b><br/>Additional research]
+        FollowScout --> ClearTasks[Clear Tasks<br/>Increment cycle]
+        ClearTasks --> EvalLLM
+        Router -->|No| EvalEnd([Evaluator End])
+    end
+    
+    Evaluator --> Writer[<b>Writer Agent</b><br/>Compose newsletter<br/>with summaries & opinions]
+    
+    Writer --> End([END])
+    
+    classDef startEnd fill:#e1f5e1,stroke:#4caf50,stroke-width:2px
+    classDef agent fill:#e3f2fd,stroke:#2196f3,stroke-width:2px
+    classDef subgraphStyle fill:#f5f5f5,stroke:#999,stroke-width:2px
+    classDef decision fill:#fff3e0,stroke:#ff9800,stroke-width:2px
+    classDef tool fill:#fce4ec,stroke:#e91e63,stroke-width:2px
+    
+    class Start,End,ScoutStart,ScoutEnd,EvalStart,EvalEnd startEnd
+    class Planner,Scout1,Scout2,ScoutN,ScoutAgent,ScoutFinal,Evaluator,EvalLLM,FollowScout,Writer agent
+    class Router,ToolCounter decision
+    class Tools,ClearTasks tool

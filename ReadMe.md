@@ -63,29 +63,58 @@ thethinkle/
 
 The newsletter generation pipeline uses a multi-agent workflow orchestrated by LangGraph:
 
-1. **Planner Agent**
+### High-Level Architecture
+
+```mermaid
+graph LR
+    A[🎯 Planner] -->|Parallel| B1[🔍 Scout 1]
+    A -->|Parallel| B2[🔍 Scout 2]
+    A -->|Parallel| B3[🔍 Scout N]
+    B1 --> C[⚖️ Evaluator]
+    B2 --> C
+    B3 --> C
+    C -->|Optional Follow-up| B1
+    C --> D[✍️ Writer]
+    D --> E[📄 Newsletter]
+    
+    style A fill:#e3f2fd,stroke:#2196f3,stroke-width:2px
+    style B1 fill:#f3e5f5,stroke:#9c27b0,stroke-width:2px
+    style B2 fill:#f3e5f5,stroke:#9c27b0,stroke-width:2px
+    style B3 fill:#f3e5f5,stroke:#9c27b0,stroke-width:2px
+    style C fill:#fff3e0,stroke:#ff9800,stroke-width:2px
+    style D fill:#e8f5e9,stroke:#4caf50,stroke-width:2px
+    style E fill:#fce4ec,stroke:#e91e63,stroke-width:2px
+```
+
+### Agent Workflow
+
+1. **🎯 Planner Agent**
    * Reads your interests from `config/interests.yaml`
    * Generates targeted research tasks for each topic
-   * Creates a plan for the newsletter structure
+   * Dispatches scouts in parallel using LangGraph's `Send` primitives
 
-2. **Scout Agent** (Parallel Execution)
-   * Executes research tasks concurrently
-   * Queries search engines, Reddit, ArXiv, YouTube, and news sources
-   * Gathers raw content and metadata from multiple viewpoints
+2. **🔍 Scout Agent** (Parallel Execution)
+   * Each scout runs independently as a subgraph
+   * Executes research using tools: Web Search, Reddit, ArXiv, YouTube
+   * Iterates up to 3 times per scout to refine results
+   * Produces structured `NewsStory` objects
 
-3. **Evaluator Agent**
+3. **⚖️ Evaluator Agent** (with Follow-up Loop)
    * Scores and ranks content based on relevance, recency, and quality
-   * Filters out noise and low-quality information
+   * Identifies information gaps or missing perspectives
+   * Can trigger follow-up scout investigations (max 1 cycle)
    * Uses your user profile to personalize scoring
 
-4. **Writer Agent**
+4. **✍️ Writer Agent**
    * Composes a cohesive newsletter from top stories
    * Adds summaries, opinions (if enabled), and source citations
-   * Formats the output as markdown
+   * Formats the output as markdown with sections
 
-5. **Final Output**
+5. **📄 Final Output**
    * Located in `data/outputs/newsletter-YYYYMMDD-HHMMSS.md`
    * Clean, verified, and easily digestible
+
+> **📚 For detailed architecture documentation**, see [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)
 
 ---
 
@@ -385,7 +414,9 @@ Built with:
 
 ## 📚 Additional Resources
 
-* [AGENTS.md](AGENTS.md) - Detailed agent architecture documentation
+* **[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)** - Detailed architecture & design decisions
+* [AGENTS.md](AGENTS.md) - Agent implementation details
+* [CONTRIBUTING.md](CONTRIBUTING.md) - Contribution guidelines
 * [tests/README.md](tests/README.md) - Testing guidelines
 * [LangGraph Documentation](https://langchain-ai.github.io/langgraph/)
 * [LangSmith Tracing](https://docs.smith.langchain.com/)
