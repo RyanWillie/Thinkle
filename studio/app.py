@@ -44,5 +44,3 @@ def get_evaluator_graph():
     graph.add_edge(START, "evaluator")
     graph.add_edge("evaluator", END)
     return graph.compile()
-
-

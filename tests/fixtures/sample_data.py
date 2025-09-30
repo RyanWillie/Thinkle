@@ -19,10 +19,10 @@ SAMPLE_REDDIT_POSTS = [
         "num_comments": 89,
         "created_utc": (datetime.now() - timedelta(hours=2)).timestamp(),
         "subreddit": "technology",
-        "author": "quantum_researcher"
+        "author": "quantum_researcher",
     },
     {
-        "id": "def456", 
+        "id": "def456",
         "title": "SpaceX Successfully Launches Mars Mission with New Raptor Engines",
         "selftext": "SpaceX has successfully launched their latest Mars mission using the new Raptor 3.0 engines, marking a significant milestone...",
         "url": "https://reddit.com/r/SpaceX/comments/def456",
@@ -30,19 +30,19 @@ SAMPLE_REDDIT_POSTS = [
         "num_comments": 156,
         "created_utc": (datetime.now() - timedelta(hours=5)).timestamp(),
         "subreddit": "SpaceX",
-        "author": "space_enthusiast"
+        "author": "space_enthusiast",
     },
     {
         "id": "ghi789",
         "title": "Climate Change: New Carbon Capture Technology Shows Promise",
         "selftext": "A new direct air capture technology developed by Climeworks has achieved record efficiency rates...",
-        "url": "https://reddit.com/r/climate/comments/ghi789", 
+        "url": "https://reddit.com/r/climate/comments/ghi789",
         "score": 850,
         "num_comments": 67,
         "created_utc": (datetime.now() - timedelta(hours=8)).timestamp(),
         "subreddit": "climate",
-        "author": "climate_scientist"
-    }
+        "author": "climate_scientist",
+    },
 ]
 
 # Sample YouTube data
@@ -56,10 +56,16 @@ SAMPLE_YOUTUBE_VIDEOS = [
         "view_count": 125000,
         "published_at": (datetime.now() - timedelta(days=2)).isoformat(),
         "transcript": [
-            {"text": "Welcome to AI Explained. Today we're discussing the future of AI...", "start": 0.0},
-            {"text": "GPT-5 is expected to bring revolutionary changes...", "start": 15.5},
-            {"text": "The implications for society are profound...", "start": 45.2}
-        ]
+            {
+                "text": "Welcome to AI Explained. Today we're discussing the future of AI...",
+                "start": 0.0,
+            },
+            {
+                "text": "GPT-5 is expected to bring revolutionary changes...",
+                "start": 15.5,
+            },
+            {"text": "The implications for society are profound...", "start": 45.2},
+        ],
     },
     {
         "video_id": "abc123def",
@@ -70,11 +76,14 @@ SAMPLE_YOUTUBE_VIDEOS = [
         "view_count": 89000,
         "published_at": (datetime.now() - timedelta(days=1)).isoformat(),
         "transcript": [
-            {"text": "Mars colonization presents unique engineering challenges...", "start": 0.0},
+            {
+                "text": "Mars colonization presents unique engineering challenges...",
+                "start": 0.0,
+            },
             {"text": "The atmosphere is less than 1% of Earth's...", "start": 30.0},
-            {"text": "Radiation shielding is a critical concern...", "start": 120.5}
-        ]
-    }
+            {"text": "Radiation shielding is a critical concern...", "start": 120.5},
+        ],
+    },
 ]
 
 # Sample ArXiv papers
@@ -88,7 +97,7 @@ SAMPLE_ARXIV_PAPERS = [
         "updated": (datetime.now() - timedelta(days=1)).strftime("%Y-%m-%d"),
         "categories": ["cs.AI", "cs.LG"],
         "pdf_url": "https://arxiv.org/pdf/2024.01234.pdf",
-        "entry_id": "http://arxiv.org/abs/2024.01234v1"
+        "entry_id": "http://arxiv.org/abs/2024.01234v1",
     },
     {
         "id": "2024.05678",
@@ -99,8 +108,8 @@ SAMPLE_ARXIV_PAPERS = [
         "updated": (datetime.now() - timedelta(days=2)).strftime("%Y-%m-%d"),
         "categories": ["quant-ph", "cs.LG"],
         "pdf_url": "https://arxiv.org/pdf/2024.05678.pdf",
-        "entry_id": "http://arxiv.org/abs/2024.05678v1"
-    }
+        "entry_id": "http://arxiv.org/abs/2024.05678v1",
+    },
 ]
 
 # Sample news articles
@@ -112,7 +121,7 @@ SAMPLE_NEWS_ARTICLES = [
         "published_at": (datetime.now() - timedelta(hours=6)).isoformat(),
         "content": "Major technology companies including Google, Microsoft, and OpenAI have announced a joint initiative to develop AI safety standards...",
         "summary": "Tech companies collaborate on AI safety standards to ensure responsible development.",
-        "author": "Sarah Tech Reporter"
+        "author": "Sarah Tech Reporter",
     },
     {
         "title": "Breakthrough in Fusion Energy: ITER Achieves Record Temperature",
@@ -121,8 +130,8 @@ SAMPLE_NEWS_ARTICLES = [
         "published_at": (datetime.now() - timedelta(hours=12)).isoformat(),
         "content": "The International Thermonuclear Experimental Reactor (ITER) has achieved a record-breaking plasma temperature of 100 million degrees Celsius...",
         "summary": "ITER fusion reactor reaches milestone temperature, bringing clean energy closer to reality.",
-        "author": "Dr. Energy Physicist"
-    }
+        "author": "Dr. Energy Physicist",
+    },
 ]
 
 # Sample API responses for mocking
@@ -134,21 +143,11 @@ MOCK_OPENAI_RESPONSE = {
             }
         }
     ],
-    "usage": {
-        "prompt_tokens": 50,
-        "completion_tokens": 100,
-        "total_tokens": 150
-    }
+    "usage": {"prompt_tokens": 50, "completion_tokens": 100, "total_tokens": 150},
 }
 
 MOCK_REDDIT_API_RESPONSE = {
-    "data": {
-        "children": [
-            {
-                "data": post
-            } for post in SAMPLE_REDDIT_POSTS
-        ]
-    }
+    "data": {"children": [{"data": post} for post in SAMPLE_REDDIT_POSTS]}
 }
 
 MOCK_YOUTUBE_API_RESPONSE = {
@@ -159,40 +158,23 @@ MOCK_YOUTUBE_API_RESPONSE = {
                 "title": video["title"],
                 "description": video["description"],
                 "channelTitle": video["channel_title"],
-                "publishedAt": video["published_at"]
+                "publishedAt": video["published_at"],
             },
-            "statistics": {
-                "viewCount": str(video["view_count"])
-            },
-            "contentDetails": {
-                "duration": video["duration"]
-            }
-        } for video in SAMPLE_YOUTUBE_VIDEOS
+            "statistics": {"viewCount": str(video["view_count"])},
+            "contentDetails": {"duration": video["duration"]},
+        }
+        for video in SAMPLE_YOUTUBE_VIDEOS
     ]
 }
 
-MOCK_ARXIV_RESPONSE = {
-    "entries": SAMPLE_ARXIV_PAPERS
-}
+MOCK_ARXIV_RESPONSE = {"entries": SAMPLE_ARXIV_PAPERS}
 
 # Error scenarios for testing
 ERROR_SCENARIOS = {
-    "network_error": {
-        "status_code": 500,
-        "error": "Internal Server Error"
-    },
-    "rate_limit_error": {
-        "status_code": 429,
-        "error": "Rate limit exceeded"
-    },
-    "authentication_error": {
-        "status_code": 401,
-        "error": "Unauthorized"
-    },
-    "not_found_error": {
-        "status_code": 404,
-        "error": "Not Found"
-    }
+    "network_error": {"status_code": 500, "error": "Internal Server Error"},
+    "rate_limit_error": {"status_code": 429, "error": "Rate limit exceeded"},
+    "authentication_error": {"status_code": 401, "error": "Unauthorized"},
+    "not_found_error": {"status_code": 404, "error": "Not Found"},
 }
 
 # Test content for processing
@@ -205,22 +187,27 @@ SAMPLE_PROCESSED_CONTENT = {
             "url": "https://reddit.com/r/technology/comments/abc123",
             "score": 1250,
             "timestamp": datetime.now().isoformat(),
-            "topics": ["artificial intelligence", "quantum computing"]
+            "topics": ["artificial intelligence", "quantum computing"],
         },
         {
             "title": "SpaceX Mars Mission Success",
             "summary": "New Raptor engines power successful Mars launch",
-            "source": "reddit", 
+            "source": "reddit",
             "url": "https://reddit.com/r/SpaceX/comments/def456",
             "score": 2100,
             "timestamp": datetime.now().isoformat(),
-            "topics": ["space exploration", "technology"]
-        }
+            "topics": ["space exploration", "technology"],
+        },
     ],
     "metadata": {
         "total_stories": 2,
         "sources": ["reddit"],
         "generation_time": datetime.now().isoformat(),
-        "topics_covered": ["artificial intelligence", "quantum computing", "space exploration", "technology"]
-    }
+        "topics_covered": [
+            "artificial intelligence",
+            "quantum computing",
+            "space exploration",
+            "technology",
+        ],
+    },
 }

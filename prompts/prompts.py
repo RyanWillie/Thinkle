@@ -238,4 +238,3 @@ Markdown
 
 Your task begins now. Read the briefing document and generate the complete briefing in Markdown format.
 """
-

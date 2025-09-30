@@ -14,18 +14,20 @@ from langchain_openai import ChatOpenAI
 from datetime import datetime
 
 
-
 def planner_node(state: PlannerState) -> PlannerState:
     """Node for the planner agent."""
     config = state["config"]
     user_background = config.user_profile
-    system_prompt = PLANNER_PROMPT.format(interests=config.interests, background=user_background, date=datetime.now().strftime("%Y-%m-%d"), max_tasks=config.max_tasks)
+    system_prompt = PLANNER_PROMPT.format(
+        interests=config.interests,
+        background=user_background,
+        date=datetime.now().strftime("%Y-%m-%d"),
+        max_tasks=config.max_tasks,
+    )
     llm = ChatOpenAI(model=config.models.planner, temperature=0)
     structured_llm = llm.with_structured_output(PlannerOutput)
     response = structured_llm.invoke([SystemMessage(content=system_prompt)])
 
-    #Dummy response
-    #response = PlannerOutput(ScoutTasks=[ResearchTask(topic="Topic 1", additional_info="Additional info 1"), ResearchTask(topic="Topic 2", additional_info="Additional info 2")])
-    return {
-        "ScoutTasks": response.ScoutTasks
-    }
+    # Dummy response
+    # response = PlannerOutput(ScoutTasks=[ResearchTask(topic="Topic 1", additional_info="Additional info 1"), ResearchTask(topic="Topic 2", additional_info="Additional info 2")])
+    return {"ScoutTasks": response.ScoutTasks}

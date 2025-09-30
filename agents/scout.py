@@ -27,6 +27,7 @@ class AgentState(TypedDict):
     tool_iterations: int
     NewsStories: Annotated[List[NewsStory], operator.add]
 
+
 # This sh
 def scout_node(state: ScoutState) -> ScoutState:
     """Node for the scout agent."""
@@ -36,7 +37,9 @@ def scout_node(state: ScoutState) -> ScoutState:
         additional_info=assigned_task.additional_info,
     )
     # Read model from config if available via upstream state injection
-    model_name = state.get("config").models.scout if state.get("config") else "gpt-5-mini"
+    model_name = (
+        state.get("config").models.scout if state.get("config") else "gpt-5-mini"
+    )
     llm = ChatOpenAI(model=model_name, temperature=0)
 
     # Tools available to the agent loop
@@ -54,14 +57,18 @@ def scout_node(state: ScoutState) -> ScoutState:
     def final_step(s: AgentState):
         messages = [SystemMessage(system_prompt), *s.get("messages", [])]
         try:
-            parsed: ScoutOutput = llm.with_structured_output(ScoutOutput).invoke(messages)
+            parsed: ScoutOutput = llm.with_structured_output(ScoutOutput).invoke(
+                messages
+            )
         except Exception:
             # Fallback: model may include extra prose or code fences; extract JSON and validate
             raw = llm.invoke(messages)
             content = getattr(raw, "content", str(raw))
 
             # Remove fenced blocks and isolate first JSON object
-            fence_match = re.search(r"```(?:json)?\s*([\s\S]*?)```", content, re.IGNORECASE)
+            fence_match = re.search(
+                r"```(?:json)?\s*([\s\S]*?)```", content, re.IGNORECASE
+            )
             if fence_match:
                 content = fence_match.group(1).strip()
 
@@ -97,10 +104,7 @@ def scout_node(state: ScoutState) -> ScoutState:
 
     subgraph.add_edge(START, "agent")
     # Use prebuilt tools_condition: branch to tools if tool calls present, else to final
-    subgraph.add_conditional_edges(
-        "agent",
-        tools_condition
-    )
+    subgraph.add_conditional_edges("agent", tools_condition)
     subgraph.add_edge("tools", "after_tools")
     subgraph.add_conditional_edges(
         "after_tools",

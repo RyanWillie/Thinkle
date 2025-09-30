@@ -13,8 +13,8 @@ from .prompts import (
 )
 
 __all__ = [
-    'PLANNER_PROMPT',
-    'EVALUATOR_PROMPT',
-    'SCOUT_PROMPT',
-    'WRITER_PROMPT',
+    "PLANNER_PROMPT",
+    "EVALUATOR_PROMPT",
+    "SCOUT_PROMPT",
+    "WRITER_PROMPT",
 ]

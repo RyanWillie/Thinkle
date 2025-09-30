@@ -1,5 +1,10 @@
 # 🧠 TheThinkle.ai
 
+[![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+[![LangGraph](https://img.shields.io/badge/LangGraph-Powered-green.svg)](https://github.com/langchain-ai/langgraph)
+
 **TheThinkle.ai** is a personalized, autonomous research assistant that delivers a weekly (or optionally daily) TL;DR-style newsletter — entertaining, insightful, and tailored to your interests.
 
 It scouts the digital world, filters for signal over noise, performs deep dives on important topics, and presents the result as a smart, witty newsletter you'll actually want to read.
@@ -95,8 +100,8 @@ The newsletter generation pipeline uses a multi-agent workflow orchestrated by L
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/thethinkle.git
-cd thethinkle
+git clone https://github.com/yourusername/Thinkle.git
+cd Thinkle
 ```
 
 ### 2. Set Up Python Environment

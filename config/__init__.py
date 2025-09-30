@@ -20,12 +20,12 @@ from .config_parser import (
 )
 
 __all__ = [
-    'ConfigParser',
-    'ThinkleConfig',
-    'NewsletterSettings',
-    'ContentSettings',
-    'RedditSettings',
-    'YouTubeSettings',
-    'OutputSettings',
-    'load_config',
+    "ConfigParser",
+    "ThinkleConfig",
+    "NewsletterSettings",
+    "ContentSettings",
+    "RedditSettings",
+    "YouTubeSettings",
+    "OutputSettings",
+    "load_config",
 ]

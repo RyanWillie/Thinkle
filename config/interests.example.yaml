@@ -1,14 +1,13 @@
-# TheThinkle.ai Configuration
-# Define your interests and preferences here
+# TheThinkle.ai Configuration Example
+# Copy this file to interests.yaml and customize for your needs
 
 # Core interests - topics you want to stay updated on
 interests:
   - artificial intelligence
   - machine learning
-  - Basic Economics/Finance (US/UK/Australia)
-  - geopolitics
-  - space exploration
-  - Gaming
+  - software engineering
+  - cloud computing
+  - cybersecurity
 
 # Brief user background used to tailor scoring, tone, and relevance
 user_profile: "A software engineer interested in staying current with technology and world events."
@@ -44,10 +43,12 @@ output:
   include_summary_stats: true # Include reading time, word count, etc.
 
 # Model configuration
+# Available models: gpt-4, gpt-4-turbo, gpt-5, gpt-5-mini
 models:
-  planner: "gpt-5"
-  scout: "gpt-5-mini"
-  evaluator: "gpt-5"
-  writer: "gpt-5"
+  planner: "gpt-5"           # Strategic planning agent
+  scout: "gpt-5-mini"        # Information gathering (runs in parallel)
+  evaluator: "gpt-5"         # Content evaluation and ranking
+  writer: "gpt-5"            # Newsletter composition
 
+# Maximum number of parallel research tasks
 max_tasks: 3

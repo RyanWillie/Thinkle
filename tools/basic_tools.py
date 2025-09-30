@@ -6,12 +6,16 @@ from langchain_community.tools.tavily_search import TavilySearchResults
 import requests
 from typing import List, Dict
 
+
 class Todo(TypedDict):
     """Todo to track."""
 
     content: str
     status: Literal["pending", "in_progress", "completed"]
+
+
 # Todo list
+
 
 # Web search tool
 @tool
@@ -20,15 +24,13 @@ def web_search(query: str) -> str:
     tavily_search = TavilySearchResults(max_results=5)
     return tavily_search.invoke(query)
 
+
 # Youtube transcript tool
+
 
 # Reddit tool
 @tool
-def reddit_search(
-    query: str,
-    subreddit: str = "all",
-    limit: int = 5
-) -> List[Dict]:
+def reddit_search(query: str, subreddit: str = "all", limit: int = 5) -> List[Dict]:
     """
     Search Reddit posts using the Pushshift API.
 
@@ -46,7 +48,7 @@ def reddit_search(
         "subreddit": subreddit,
         "size": limit,
         "sort": "desc",
-        "sort_type": "score"
+        "sort_type": "score",
     }
 
     response = requests.get(url, params=params)
@@ -59,7 +61,7 @@ def reddit_search(
             "url": f"https://www.reddit.com{post.get('permalink', '')}",
             "score": post.get("score", 0),
             "subreddit": post.get("subreddit", ""),
-            "created_utc": post.get("created_utc")
+            "created_utc": post.get("created_utc"),
         }
         for post in data
     ]
