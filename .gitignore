@@ -30,5 +30,9 @@ htmlcov/
 # Data caches
 data_module/temp/
 
+# Generated outputs (newsletters should not be committed)
+data/outputs/*
+!data/outputs/.gitkeep
+
 # LangGraph local cache
 .langgraph_api/
