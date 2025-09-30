@@ -1,0 +1,43 @@
+# Core LLM and AI framework (aligned for Pydantic v2 + langchain-core 0.3.x)
+langchain==0.3.27
+langchain-openai==0.3.33
+langchain-community==0.3.29
+openai>=1.104.2,<2.0.0
+
+# Data source integrations
+praw==7.7.1                    # Reddit API
+arxiv==2.1.3                   # ArXiv papers
+youtube-transcript-api==0.6.2   # YouTube transcripts
+googlesearch-python==1.2.4     # Free Google search (alternative to SerpAPI)
+duckduckgo-search==6.2.13      # Free DuckDuckGo search API
+
+# Web scraping and HTTP
+requests==2.32.5
+beautifulsoup4==4.12.3
+lxml==5.3.0
+selenium==4.24.0               # For dynamic content if needed
+fake-useragent==1.5.1          # Avoid bot detection
+
+# Configuration and data handling
+pydantic==2.8.2                # Data validation and settings
+python-dotenv==1.0.1           # Environment variable management
+pyyaml==6.0.2                  # YAML configuration files
+jinja2==3.1.4                  # Template engine for newsletters
+
+# Output generation
+markdown==3.7                  # Markdown processing
+reportlab==4.2.2               # PDF generation (future use)
+weasyprint==62.3               # HTML to PDF conversion (alternative)
+
+# Utilities and helpers
+python-dateutil==2.9.0         # Date parsing and manipulation
+feedparser==6.0.11             # RSS feed parsing (bonus data source)
+newspaper3k==0.2.8             # Article extraction and NLP
+nltk==3.9.1                    # Natural language processing
+textstat==0.7.3                # Text readability analysis
+
+# Development and testing
+pytest==8.3.3
+python-dotenv==1.0.1
+black==24.8.0                  # Code formatting
+flake8==7.1.1                  # Linting

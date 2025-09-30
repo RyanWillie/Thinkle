@@ -1,0 +1,13 @@
+{
+    "dependencies": ["."],
+    "graphs": {
+      "thinkle": "studio/app.py:get_graph",
+      "scout": "studio/app.py:get_scout_graph",
+      "evaluator": "studio/app.py:get_evaluator_graph"
+    },
+    "examples": {
+      "thinkle": "studio/app.py:get_example_input"
+    },
+    "env": ".env",
+    "python_version": "3.11"
+  }

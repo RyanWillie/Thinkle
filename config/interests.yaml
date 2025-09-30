@@ -1,0 +1,53 @@
+# TheThinkle.ai Configuration
+# Define your interests and preferences here
+
+# Core interests - topics you want to stay updated on
+interests:
+  - artificial intelligence
+  - machine learning
+  - Basic Economics/Finance (US/UK/Australia)
+  - geopolitics
+  - space exploration
+  - Gaming
+
+# Brief user background used to tailor scoring, tone, and relevance
+user_profile: "Ryan is a 25 year old Australian male, he currently works as a software engineer in the UK."
+
+# Newsletter preferences
+newsletter:
+  tone: "witty"              # Options: professional, witty, casual, academic
+  include_opinions: true     # Include AI-generated opinions and hot takes
+  frequency: "weekly"        # Options: daily, weekly
+  max_stories: 10           # Maximum number of stories per newsletter
+  
+# Content preferences
+content:
+  include_academic: true     # Include ArXiv papers
+  include_reddit: true       # Include Reddit discussions
+  include_youtube: true      # Include YouTube content summaries
+  include_news: true         # Include news articles
+  
+  # Reddit-specific settings
+  reddit:
+    min_upvotes: 100        # Minimum upvotes for consideration
+    max_age_hours: 48       # Only consider posts from last 48 hours
+    
+  # YouTube-specific settings
+  youtube:
+    min_views: 10000        # Minimum views for consideration
+    max_duration_minutes: 60 # Skip videos longer than 60 minutes
+    
+# Output preferences
+output:
+  format: "markdown"         # Primary format: markdown, pdf, html
+  include_sources: true      # Include source links
+  include_summary_stats: true # Include reading time, word count, etc.
+
+# Model configuration
+models:
+  planner: "gpt-5"
+  scout: "gpt-5-mini"
+  evaluator: "gpt-5"
+  writer: "gpt-5"
+
+max_tasks: 3
